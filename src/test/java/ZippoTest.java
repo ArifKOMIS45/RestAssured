@@ -38,6 +38,19 @@ public class ZippoTest {
         ;
 
     }
+    @Test
+    public void logtest() {
+        given()
+                .log().all()
+                .when()
+                .get("http://api.zippopotam.us/us/90210")
+                .then()
+                .log().body()
+
+        ;
+
+    }
+
 
 
 }
