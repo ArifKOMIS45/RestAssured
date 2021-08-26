@@ -211,7 +211,18 @@ public class ZippoTest {
         ;
     }
 
-
+    @Test
+    public void queryParamTest2(){
+        for (int i = 1; i <10 ; i++) {
+        given()
+                .param("page",i)//boyle yapinca param ile kendisi? mark verip parametre ekliyor
+                .log().uri()
+                .when()
+                .get("https://gorest.co.in/public/v1/users")
+                .then()
+                .body("meta.pagination.page",equalTo(i))
+        ;
+    }}
 
 
 
