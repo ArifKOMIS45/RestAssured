@@ -1,6 +1,5 @@
 import POJO.JsonPlaceHolder;
 import io.restassured.http.ContentType;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -175,32 +174,32 @@ public class Task {
                         .then()
                         .statusCode(200)
                         .extract().as(JsonPlaceHolder[].class);
-        System.out.print("js = " + Arrays.toString(js));
+        System.out.println("js = " + Arrays.toString(js));
 
     }
-/** Task 8
- * create a request to https://jsonplaceholder.typicode.com/todos
- * expect status 200
- * Converting Array Into List of POJOs
- */
-@Test
-public void task8() {
 
-JsonPlaceHolder[] js =
-        given()
-                .when()
-                .get("https://jsonplaceholder.typicode.com/todos")
+    /**
+     * Task 8
+     * create a request to https://jsonplaceholder.typicode.com/todos
+     * expect status 200
+     * Converting Array Into List of POJOs
+     */
+    @Test
+    public void task8() {
 
-                .then()
-                .statusCode(200)
-                .extract().as(JsonPlaceHolder[].class);
-List<JsonPlaceHolder> list= Arrays.asList(js);
-    for (int i = 0; i <list.size() ; i++) {
-        System.out.println(list.get(i));
+        JsonPlaceHolder[] js =
+                given()
+                        .when()
+                        .get("https://jsonplaceholder.typicode.com/todos")
+
+                        .then()
+                        .statusCode(200)
+                        .extract().as(JsonPlaceHolder[].class);
+        List<JsonPlaceHolder> list = Arrays.asList(js);
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
     }
-        
-    }
-   
 
 
 }
