@@ -13,7 +13,12 @@ public class GoRestCommentsTest {
     // Task 1: https://gorest.co.in/public/v1/comments  Api sinden dönen verilerdeki data yı bir nesne yardımıyla
     //         List olarak alınız.
 
-    @Test
+    int id = 0;
+
+    //Task 2=  Bütün Comment lardaki emailleri bir list olarak alınız ve
+    // içinde "acharya_rajinder@ankunding.biz" olduğunu doğrulayınız.
+
+    @Test(enabled = false)
     public void getGoRestComments() {
         List<Data> dataList =
                 given()
@@ -23,16 +28,13 @@ public class GoRestCommentsTest {
                         .then()
                         .statusCode(200)
                         .contentType(ContentType.JSON)
-                         .log().body()
+                        .log().body()
                         .extract().jsonPath().getList("data", Data.class);
 
         System.out.println("userCommentsList = " + dataList);
     }
 
-    //Task 2=  Bütün Comment lardaki emailleri bir list olarak alınız ve
-    // içinde "acharya_rajinder@ankunding.biz" olduğunu doğrulayınız.
-
-    @Test
+    @Test(enabled = false)
     public void getGoRestCommentsEmails() {
         List<String> userCommentsEmailList =
                 given()
@@ -48,7 +50,7 @@ public class GoRestCommentsTest {
         Assert.assertTrue(userCommentsEmailList.contains("acharya_rajinder@ankunding.biz"));
     }
 
-    @Test
+    @Test(enabled = false)
     public void getGoRestCommentsEmails2() {
         //data[0].email demek birinci email
         //Butun emailler icin data.email dememiz gerek
@@ -70,7 +72,7 @@ public class GoRestCommentsTest {
         Assert.assertTrue(userCommentsEmailList.contains("acharya_rajinder@ankunding.biz"));
     }
 
-    @Test
+    @Test(enabled = false)
     public void getGoRestCommentsEmails3() {
         //data[0].email demek birinci email
         //Butun emailler icin data.email dememiz gerek
@@ -98,8 +100,7 @@ public class GoRestCommentsTest {
         Assert.assertTrue(emailList2.contains("acharya_rajinder@ankunding.biz"));
     }
 
-
-    @Test
+    @Test(enabled = false)
     public void getCommentsPojo() {
 
         CommentsBody commentsBody =
@@ -116,32 +117,75 @@ public class GoRestCommentsTest {
 
     }
 
-
     @Test
     public void getCommentsPost() {
         Data user = new Data();
-        //user.setId(123);
-       // user.setPost_id(143);
-        user.setEmail("arifkaya@gmail.com");
-        user.setName("Arif");
-        user.setBody("Kim demis suya vurulmaz percin");
-
+       user.setEmail("arpali@gmail.com");
+        user.setName("Ara2");
+        user.setBody("2d");
+        id =
         given()
                 .header("Authorization", "Bearer 94154d2d141c86ace03fe8bed7d123bbb874b05046eadacf532b3dc60596a006")
                 .contentType(ContentType.JSON)
                 .body(user)
                 .when()
-                .post("https://gorest.co.in/public/v1/posts/123/comments")
+                .post("https://gorest.co.in/public/v1/posts/68/comments")
 
                 .then()
                 .statusCode(201)
                 .log().body()
+        .extract().jsonPath().getInt("data.id")
+        ;
+        System.out.println("id = " + id);
+    }
 
+    @Test(dependsOnMethods = "getCommentsPost",priority = 1)
+    public void getCommentsPut() {
+        Data user = new Data();
+        user.setEmail("arpali@gmail.com");
+        user.setName("Ara2");
+        user.setBody("kim cin");//update yapilan yer
+        user.setPost_id(68);
+
+
+        given()
+                .header("Authorization", "Bearer 94154d2d141c86ace03fe8bed7d123bbb874b05046eadacf532b3dc60596a006")
+                .contentType(ContentType.JSON)
+                .pathParam("id",id)
+                .body(user)
+                .when()
+                .put("https://gorest.co.in/public/v1/comments/{id}")
+                .then()
+                //.statusCode(200)
+                .log().body()
+        ;
+    }
+
+    @Test(priority = 2)
+    public void getCommentsDelete() {
+        given()
+                .header("Authorization", "Bearer 94154d2d141c86ace03fe8bed7d123bbb874b05046eadacf532b3dc60596a006")
+                .pathParam("id",id)
+                .when()
+                .delete("https://gorest.co.in/public/v1/comments/{id}")
+                .then()
+                .statusCode(204)
 
         ;
-
-
     }
+    @Test(priority = 3)
+    public void getCommentsDeleteNegative() {
+        given()
+                .header("Authorization", "Bearer 94154d2d141c86ace03fe8bed7d123bbb874b05046eadacf532b3dc60596a006")
+                .pathParam("id",id)
+                .when()
+                .delete("https://gorest.co.in/public/v1/comments/{id}")
+                .then()
+                .statusCode(404)
+
+        ;
+    }
+
 
 
 }
