@@ -1,4 +1,4 @@
-package goRest;
+package goRest.Model;
 
 public class Data {
     private int id;

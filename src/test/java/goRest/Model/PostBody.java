@@ -1,16 +1,16 @@
-package goRest;
+package goRest.Model;
 
 import java.util.List;
 
-public class CommentsBody {
+public class PostBody {
     private Meta meta;
-   private List<Data> data;
+    private List<DataPost> data;
 
     @Override
     public String toString() {
-        return "GoRestCommentsAll{" +
+        return "{" +
                 "meta=" + meta +
-                ", dataList=" + data +
+                ", dataPost=" + data +
                 '}';
     }
 
@@ -22,11 +22,11 @@ public class CommentsBody {
         this.meta = meta;
     }
 
-    public List<Data> getData() {
+    public List<DataPost> getData() {
         return data;
     }
 
-    public void setData(List<Data> data) {
+    public void setData(List<DataPost> data) {
         this.data = data;
     }
 }

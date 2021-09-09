@@ -1,5 +1,7 @@
 package goRest;
 
+import goRest.Model.CommentsBody;
+import goRest.Model.Data;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;

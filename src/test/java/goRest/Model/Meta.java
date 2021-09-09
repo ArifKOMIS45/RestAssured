@@ -1,4 +1,4 @@
-package goRest;
+package goRest.Model;
 
 public class Meta {
     private Pagination pagination;
@@ -6,7 +6,7 @@ public class Meta {
 
     @Override
     public String toString() {
-        return "GetCommentsMeta{" +
+        return "Meta{" +
                 "pagination=" + pagination +
                 '}';
     }

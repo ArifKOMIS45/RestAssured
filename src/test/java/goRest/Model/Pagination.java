@@ -1,4 +1,4 @@
-package goRest;
+package goRest.Model;
 
 public class Pagination {
     private int total;
@@ -9,7 +9,7 @@ public class Pagination {
 
     @Override
     public String toString() {
-        return "GoRestCommentsPagination{" +
+        return "Pagination{" +
                 "total=" + total +
                 ", pages=" + pages +
                 ", page=" + page +

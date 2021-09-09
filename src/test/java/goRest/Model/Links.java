@@ -1,4 +1,4 @@
-package goRest;
+package goRest.Model;
 
 public class Links {
     private String previous;
@@ -7,7 +7,7 @@ public class Links {
 
     @Override
     public String toString() {
-        return "GoRestCommentsLinks{" +
+        return "Links{" +
                 "previous='" + previous + '\'' +
                 ", current='" + current + '\'' +
                 ", next='" + next + '\'' +
