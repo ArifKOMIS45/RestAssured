@@ -99,6 +99,7 @@ public class GprestPostTest {
 
         ;
     }
+
     @Test(dependsOnMethods = "getCreatePost")
     public void getPostUpdate() {
         DataPost p = new DataPost();
@@ -121,6 +122,37 @@ public class GprestPostTest {
                 .statusCode(200)
 
         ;
+    }
+
+    @Test(dependsOnMethods = "getPostUpdate")
+    public void postDelete() {
+        given()
+                .header("Authorization", "Bearer 94154d2d141c86ace03fe8bed7d123bbb874b05046eadacf532b3dc60596a006")
+                .pathParam("id", id)
+
+                .when()
+                .delete("/posts/{id}")
+                .then()
+                .log().status()
+                .statusCode(204)
+        ;
+
+    }
+
+
+    @Test(dependsOnMethods = "postDelete")
+    public void postDeleteNegative() {
+        given()
+                .header("Authorization", "Bearer 94154d2d141c86ace03fe8bed7d123bbb874b05046eadacf532b3dc60596a006")
+                .pathParam("id", id)
+
+                .when()
+                .delete("/posts/{id}")
+                .then()
+                .log().status()
+                .statusCode(404)
+        ;
+
     }
 
 }
