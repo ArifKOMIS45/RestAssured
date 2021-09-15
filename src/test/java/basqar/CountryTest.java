@@ -64,7 +64,7 @@ public class CountryTest {
         System.out.println("ID = " + id);
     }
 
-    @Test(dependsOnMethods = "createCountry",enabled = false)
+    @Test(dependsOnMethods = "createCountry")
     public void createCountryNegative() {
         Country country = new Country();
         country.setName(randomGenName);
